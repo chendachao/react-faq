@@ -1,6 +1,6 @@
 {
   "name": "react-faq",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Made with create-react-library",
   "author": "chendachao",
   "license": "MIT",
@@ -26,7 +26,8 @@
   "peerDependencies": {
     "marked": "^1.0.0",
     "react": "^16.0.0",
-    "react-dock": "^0.2.4"
+    "react-dock": "^0.2.4",
+    "classnames": "^2.2.6"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.8.3",
@@ -51,7 +52,8 @@
     "react": "^16.13.1",
     "react-dock": "^0.2.4",
     "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1"
+    "react-scripts": "^3.4.1",
+    "classnames": "^2.2.6"
   },
   "browserslist": {
     "production": [
