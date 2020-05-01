@@ -1,0 +1,10 @@
+{
+  "home.title": "Home",
+  "home.link.home": "Home",
+  "home.link.demo": "Demo",
+  "home.link.demo2": "Demo2",
+  "home.welcome": "Welcome {name}!",
+  "home.declarative": "Bang Bang de",
+  "home.declarative.p1": "Internationalization",
+  "loading.message": "Loading"
+}

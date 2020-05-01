@@ -1,0 +1,13 @@
+[
+  {
+    "id": 20,
+    "label": "Parent link",
+    "children": [
+      {
+        "id": 79,
+        "label": "Child link",
+        "content": "This is a header\n\nAnd this is a paragraph"
+      }
+    ]
+  }
+]
