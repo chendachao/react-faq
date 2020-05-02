@@ -93,7 +93,7 @@ const createRoutesConfig = (locale) => {
       path: '/demo',
       component: lazyLoadComponent(import('./app/components/Demo')),
       config: {
-        url: `/assets/data/${locale}/demo.json`,
+        url: `/react-faq/assets/data/${locale}/demo.json`,
         name: 'Demo'
       }
     },
@@ -101,7 +101,7 @@ const createRoutesConfig = (locale) => {
       path: '/demo2',
       component: lazyLoadComponent(import('./app/components/Demo2')),
       config: {
-        url: `/assets/data/${locale}/demo2.json`,
+        url: `/react-faq/assets/data/${locale}/demo2.json`,
         name: 'Demo2'
       }
     },
