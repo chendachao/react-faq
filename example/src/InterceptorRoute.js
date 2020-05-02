@@ -30,11 +30,12 @@ function InterceptorRoute({loadContext, loading, ...route}) {
       }, 1000);
 
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   return (
     <div>
-      <Route 
+      <Route
           path={route.path}
           exact={route.exact}
           render={props => {
@@ -42,8 +43,8 @@ function InterceptorRoute({loadContext, loading, ...route}) {
               return loading();
             }
             return (
-              <route.component {...props} {...context} 
-                routes={route.routes} 
+              <route.component {...props} {...context}
+                routes={route.routes}
                 locationChanged={locationChanged}/>
             )
           }}

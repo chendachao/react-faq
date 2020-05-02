@@ -22,12 +22,12 @@ function FAQDemo() {
     return response.data;
   }
 
-  const loadChildren = async (id) => {
-    console.log('id', id);
-    const url = './assets/data/en/faqs-children.json';
-    const children = await getFAQs(url);
-    return children;
-  }
+  // const loadChildren = async (id) => {
+  //   console.log('id', id);
+  //   const url = './assets/data/en/faqs-children.json';
+  //   const children = await getFAQs(url);
+  //   return children;
+  // }
 
   const loadContent = async (id) => {
     console.log('id', id);

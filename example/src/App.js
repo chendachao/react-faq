@@ -123,11 +123,11 @@ function App() {
     (async () => {
       const messages = await getI18nMessages(initialLocale)
       updateIntl(initialLocale, messages);
-      setState({
+      setState(state => ({
         ...state,
         locale: initialLocale,
         messages,
-      });
+      }));
     })();
   }, []);
 
