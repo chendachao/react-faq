@@ -39,7 +39,7 @@ export function Loading() {
 }
 
 const getI18nMessages = async lang => {
-  const url = `/assets/locales/${lang}.json`;
+  const url = `/react-faq/assets/locales/${lang}.json`;
   const response = await axios.get(url);
   // console.log('data', response.data);
   return response.data;

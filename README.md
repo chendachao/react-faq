@@ -2,6 +2,8 @@
 
 > Made with create-react-library
 
+
+[![Github Actions](https://github.com/chendachao/react-faq/workflows/Github%20Actions/badge.svg)](https://github.com/chendachao/react-faq/actions)
 [![NPM](https://img.shields.io/npm/v/react-faq.svg)](https://www.npmjs.com/package/react-faq) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
