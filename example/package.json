@@ -13,7 +13,6 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "file:../node_modules/react-scripts",
-    "node-sass": "file:../node_modules/node-sass",
     "redux": "^4.0.5"
   },
   "scripts": {
