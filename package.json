@@ -1,7 +1,7 @@
 {
   "name": "react-faq",
   "homepage": "https://chendachao.github.io/react-faq",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Made with create-react-library",
   "author": "chendachao",
   "license": "MIT",
@@ -12,7 +12,6 @@
   "engines": {
     "node": ">=10"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
@@ -29,8 +28,7 @@
     "classnames": "^2.2.6",
     "marked": "^1.0.0",
     "react": "^16.0.0",
-    "react-dock": "^0.2.4",
-    "classnames": "^2.2.6"
+    "react-dock": "^0.2.4"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.8.3",
@@ -61,8 +59,7 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
-    "redux": "^4.0.5",
-    "classnames": "^2.2.6"
+    "redux": "^4.0.5"
   },
   "browserslist": {
     "production": [
