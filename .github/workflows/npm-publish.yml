@@ -40,10 +40,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: https://npm.pkg.github.com/
-      - name: install, build, publish
-        run: |
-          npm install
-          npm set //npm.pkg.github.com/:_authToken $GITHUB_TOKEN
-          npm publish
+      - run: npm install
+      - run: npm set registry "https://npm.pkg.github.com/"
+      - run: npm set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
