@@ -4,16 +4,16 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@loadable/component": "file:../node_modules/@loadable/component",
-    "axios": "file:../node_modules/axios",
-    "react": "file:../node_modules/react",
-    "react-dom": "file:../node_modules/react-dom",
-    "react-faq": "file:..",
-    "react-intl": "file:../node_modules/react-intl",
-    "react-redux": "file:../node_modules/react-redux",
-    "react-router-dom": "file:../node_modules/react-router-dom",
-    "react-scripts": "file:../node_modules/react-scripts",
-    "redux": "file:../node_modules/redux"
+    "@loadable/component": "link:../node_modules/@loadable/component",
+    "axios": "link:../node_modules/axios",
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom",
+    "react-faq": "link:..",
+    "react-intl": "link:../node_modules/react-intl",
+    "react-redux": "link:../node_modules/react-redux",
+    "react-router-dom": "link:../node_modules/react-router-dom",
+    "react-scripts": "link:../node_modules/react-scripts",
+    "redux": "link:../node_modules/redux"
   },
   "scripts": {
     "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",

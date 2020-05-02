@@ -183,7 +183,7 @@ function App() {
           <FAQDemo/>
 
           <hr/>
-          <Router basename="/react-faq">
+          <Router>
             <ul>
               <li>
                 <Link to="/"><FormattedMessage id="home.link.home"/></Link>
