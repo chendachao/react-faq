@@ -24,8 +24,8 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install, build and publish
         run: |
-          npm install
-          npm publish --access public
+          yarn install
+          yarn publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
