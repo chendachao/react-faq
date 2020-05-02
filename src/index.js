@@ -5,7 +5,7 @@
 //   return <div className={styles.test}>Example Component: {text}</div>
 // }
 
-import './styles.scss';
+import './styles.css';
 import FAQContainer from './FAQContainer'
 import FAQ from './FAQ'
 
