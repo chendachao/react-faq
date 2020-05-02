@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "label": "Parent link",
+    "hasChildren": true,
+    "children": [
+      {
+        "id": 66,
+        "label": "Child link",
+        "children": [
+          {
+            "id": 88,
+            "label": "Sub Child link",
+            "content": "<h1>This is title</h1> <div>Hello Content.</div>"
+          }
+        ]
+      },
+      {
+        "id": 67,
+        "label": "Child link2",
+        "content": "<p>Hello Content 2.</p>"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "label": "Parent link2",
+    "children": [
+      {
+        "id": 68,
+        "label": "Child link",
+        "content": ""
+      }
+    ]
+  }
+]
