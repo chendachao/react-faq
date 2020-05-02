@@ -1,0 +1,47 @@
+name: NPM && Github NPM Publish
+
+on:
+  push:
+    branches:
+      - master
+
+# on:
+#   release:
+#     types: [published]
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/
+      - name: install, build, publish
+        run: |
+          npm install
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-gpr:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://npm.pkg.github.com/
+      - name: install, build, publish
+        run: |
+          npm install
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

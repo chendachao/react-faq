@@ -17,21 +17,21 @@ function FAQDemo() {
     })();
   }, []);
 
-  const getFAQs = async (url = './assets/data/en/faqs.json') => {
+  const getFAQs = async (url = '/react-faq/assets/data/en/faqs.json') => {
     const response = await axios.get(url);
     return response.data;
   }
 
   // const loadChildren = async (id) => {
   //   console.log('id', id);
-  //   const url = './assets/data/en/faqs-children.json';
+  //   const url = '/react-faq/assets/data/en/faqs-children.json';
   //   const children = await getFAQs(url);
   //   return children;
   // }
 
   const loadContent = async (id) => {
     console.log('id', id);
-    const url = './assets/data/en/faq-content.json';
+    const url = '/react-faq/assets/data/en/faq-content.json';
     const data = await getFAQs(url);
     return data.content;
   }
