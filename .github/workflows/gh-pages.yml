@@ -1,4 +1,4 @@
-name: Github Actions
+name: Github Pages
 
 on:
   push:
