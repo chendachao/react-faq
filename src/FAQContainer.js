@@ -135,9 +135,9 @@ function FAQContainer({data, title, loadChildren, loadContent}) {
   }
 
   return (
-    <FAQDock ref={e => helpDockRef = e} isVisible={false}>
+    <FAQDock ref={e => helpDockRef = e} isVisible={true}>
       <div className={styles.cpHelpContainer}>
-        <h3 className={styles.cpHelpTitleT}>{title || 'FAQ Dock'}</h3>
+        <h3 className={styles.cpHelpTitle}>{title || 'FAQ Dock'}</h3>
         {
           isNode(currentNode) ? <FAQContent faq={currentNode} goBack={goBack} isLoadingContent={isLoadingContent}/>
           : (faqs.length === 0) ? <div>Loading...</div>

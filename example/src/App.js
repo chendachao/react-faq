@@ -14,7 +14,8 @@ import 'react-faq/dist/index.css'
 
 import React, { useState, useEffect }  from 'react';
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Link,
 } from 'react-router-dom';
@@ -182,7 +183,7 @@ function App() {
           <FAQDemo/>
 
           <hr/>
-          <Router>
+          <Router basename="/react-faq">
             <ul>
               <li>
                 <Link to="/"><FormattedMessage id="home.link.home"/></Link>

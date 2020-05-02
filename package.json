@@ -1,5 +1,6 @@
 {
   "name": "react-faq",
+  "homepage": "https://chendachao.github.io/react-faq",
   "version": "1.0.2",
   "description": "Made with create-react-library",
   "author": "chendachao",
@@ -21,7 +22,7 @@
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build -r https://chendachao:$GITHUB_TOKEN@github.com/chendachao/react-faq.git"
   },
   "peerDependencies": {
     "marked": "^1.0.0",
