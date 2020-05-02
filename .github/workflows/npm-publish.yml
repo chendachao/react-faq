@@ -2,8 +2,9 @@ name: NPM && Github NPM Publish
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 # on:
 #   release:
@@ -42,6 +43,7 @@ jobs:
       - name: install, build, publish
         run: |
           npm install
+          echo //npm.pkg.github.com/:_authToken=${NPM_TOKEN} > .npmrc
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

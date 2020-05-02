@@ -28,7 +28,8 @@
     "classnames": "^2.2.6",
     "marked": "^1.0.0",
     "react": "^16.0.0",
-    "react-dock": "^0.2.4"
+    "react-dock": "^0.2.4",
+    "classnames": "^2.2.6"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.8.3",
@@ -59,7 +60,8 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "classnames": "^2.2.6"
   },
   "browserslist": {
     "production": [
@@ -75,8 +77,5 @@
   },
   "files": [
     "dist"
-  ],
-  "dependencies": {
-    "classnames": "^2.2.6"
-  }
+  ]
 }
