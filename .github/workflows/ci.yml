@@ -15,10 +15,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: install, build
+      - name: install, build, deploy
         run: |
-          yarn install
-          yarn deploy
+          npm install
+          npm run deploy
         env:
           CI: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
