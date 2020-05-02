@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Dock from "react-dock";
+import React, { Component } from 'react'
+import Dock from 'react-dock'
 
-import styles from './styles.scss';
+import styles from './styles.css'
 
 class FAQDock extends Component {
   defaultDockConfig = {
@@ -17,21 +17,21 @@ class FAQDock extends Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       data: [],
       ...this.defaultDockConfig,
-      isVisible: props.isVisible,
+      isVisible: props.isVisible
       // dimMode: 'none',
     }
-
   }
 
   render() {
-    const {isVisible, dimMode, size, dockStyle} = this.state;
-    const {children} = this.props;
+    const { isVisible, dimMode, size, dockStyle } = this.state
+    const { children } = this.props
     return (
-      <Dock position='right'
+      <Dock
+        position='right'
         isVisible={isVisible}
         dimMode={dimMode}
         fluid={false}
@@ -43,23 +43,26 @@ class FAQDock extends Component {
       >
         <span onClick={() => this.setState({ isVisible: !isVisible })}>
           <button className={styles.helpDockCloseIcon}>
-            <svg class="x-29px_svg__svgIcon-use" width="29" height="29"><path d="M20.13 8.11l-5.61 5.61-5.6-5.61-.81.8 5.61 5.61-5.61 5.61.8.8 5.61-5.6 5.61 5.6.8-.8-5.6-5.6 5.6-5.62" fill-rule="evenodd"></path></svg>
+            <svg class='x-29px_svg__svgIcon-use' width='29' height='29'>
+              <path
+                d='M20.13 8.11l-5.61 5.61-5.6-5.61-.81.8 5.61 5.61-5.61 5.61.8.8 5.61-5.6 5.61 5.6.8-.8-5.6-5.6 5.6-5.62'
+                fill-rule='evenodd'
+              ></path>
+            </svg>
           </button>
         </span>
         {children}
       </Dock>
-    );
+    )
   }
 
-  handleVisibleChange = isVisible => {
-    this.setState({ isVisible });
+  handleVisibleChange = (isVisible) => {
+    this.setState({ isVisible })
   }
 
-  handleSizeChange = size => {
-    this.setState({ size });
+  handleSizeChange = (size) => {
+    this.setState({ size })
   }
-
 }
 
-export default FAQDock;
-
+export default FAQDock
