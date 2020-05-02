@@ -25,13 +25,15 @@
     "deploy": "gh-pages -d example/build -r https://chendachao:$GITHUB_TOKEN@github.com/chendachao/react-faq.git"
   },
   "peerDependencies": {
+    "classnames": "^2.2.6",
     "marked": "^1.0.0",
     "react": "^16.0.0",
-    "react-dock": "^0.2.4",
-    "classnames": "^2.2.6"
+    "react-dock": "^0.2.4"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@loadable/component": "^5.12.0",
+    "axios": "^0.19.2",
     "babel-eslint": "^10.0.3",
     "classnames": "^2.2.6",
     "cross-env": "^7.0.2",
@@ -53,7 +55,11 @@
     "react": "^16.13.1",
     "react-dock": "^0.2.4",
     "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1"
+    "react-intl": "^4.5.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.1",
+    "redux": "^4.0.5"
   },
   "browserslist": {
     "production": [

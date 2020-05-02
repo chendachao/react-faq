@@ -4,16 +4,16 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@loadable/component": "^5.12.0",
-    "axios": "^0.19.2",
+    "@loadable/component": "file:../node_modules/@loadable/component",
+    "axios": "file:../node_modules/axios",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
     "react-faq": "file:..",
-    "react-intl": "^4.5.1",
-    "react-redux": "^7.2.0",
-    "react-router-dom": "^5.1.2",
+    "react-intl": "file:../node_modules/react-intl",
+    "react-redux": "file:../node_modules/react-redux",
+    "react-router-dom": "file:../node_modules/react-router-dom",
     "react-scripts": "file:../node_modules/react-scripts",
-    "redux": "^4.0.5"
+    "redux": "file:../node_modules/redux"
   },
   "scripts": {
     "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
