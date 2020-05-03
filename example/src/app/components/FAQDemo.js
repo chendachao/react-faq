@@ -6,14 +6,17 @@ import ReactFAQ from 'react-faq';
 function FAQDemo() {
 
   const [data, setData] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
    // load data at first mount
    useEffect(() => {
     (async () => {
+      setLoading(true);
       setTimeout(async () => {
         const data = await getFAQs();
         setData(data);
-      }, 2000);
+        setLoading(false);
+      }, 1000);
     })();
   }, []);
 
@@ -25,19 +28,27 @@ function FAQDemo() {
   // const loadChildren = async (id) => {
   //   console.log('id', id);
   //   const url = '/react-faq/assets/data/en/faqs-children.json';
-  //   const children = await getFAQs(url);
-  //   return children;
+  //   return new Promise(async (resolve, reject) => {
+  //     setTimeout(async () => {
+  //       const children = await getFAQs(url);
+  //       resolve(children);
+  //     }, 0);
+  //   });
   // }
 
   const loadContent = async (id) => {
     console.log('id', id);
     const url = '/react-faq/assets/data/en/faq-content.json';
-    const data = await getFAQs(url);
-    return data.content;
+    return new Promise(async (resolve, reject) => {
+      setTimeout(async () => {
+        const data = await getFAQs(url);
+        resolve(data.content);
+      }, 500);
+    });
   }
 
   return (
-    <ReactFAQ data={data} loadContent={loadContent}/>
+    <ReactFAQ data={data} loadContent={loadContent} isLoading={isLoading}/>
   )
 
 }

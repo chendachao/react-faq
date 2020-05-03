@@ -1,24 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import FAQDock from './FAQDock';
-import { FAQComponent, FAQContent } from './FAQ';
+import { FAQItem, FAQContent } from './FAQ';
 import { useEventListener } from './hooks';
+import { isNode, toggleActivity, findNodeById } from './utils';
 
 import styles from './styles.module.css';
 
-function FAQContainer({ data, title, loadChildren, loadContent }) {
+function FAQContainer({ data, title, isLoading, loadChildren, loadContent }) {
   let helpDockRef = useRef();
-  const [faqs, setFaqs] = useState([]);
-  const [currentNode, setCurrentNode] = useState();
-  const [isLoadingContent, setIsLoadingContent] = useState(false);
+  const [items, setItems] = useState([]);
+  const [currentItem, setCurrentItem] = useState();
+  const [isLoadingContent, setLoadingContent] = useState(false);
 
   useEffect(() => {
-    setFaqs(data);
+    setItems(data);
   }, [data]);
 
   useEventListener(document, 'click', (e) => {
     const { target } = e;
-
-    // const isHanlder = target.classList.contains('cp-help') && target.classList.contains('cp-help-link');;
     const isHanlder = target.hasAttribute('data-cp-help-dock');
 
     if (isHanlder) {
@@ -27,55 +26,9 @@ function FAQContainer({ data, title, loadChildren, loadContent }) {
     }
   });
 
-  const isNode = (faq) => {
-    return faq && !faq.children;
-  };
-
-  const hasActiveNode = (children) => {
-    return children.some((child) => {
-      if (isNode(child)) {
-        return child.active === true;
-      } else {
-        return hasActiveNode(child.children);
-      }
-    });
-  };
-
-  // active/deactive item recursively
-  const toggleActivity = (id, items, active /* default */) => {
-    return items.reduce((acc, item) => {
-      let newItem = item;
-      if (item.id === id) {
-        newItem = {
-          ...item,
-          active: !item.active || active
-        };
-      } else if (item.children) {
-        item.children = toggleActivity(id, item.children, active);
-        const canActive = hasActiveNode(item.children);
-        canActive && (item.active = canActive);
-      }
-      acc.push(newItem);
-      return acc;
-    }, []);
-  };
-
-  const findNodeById = (id, nodes) => {
-    const tempArr = [...nodes];
-    while (tempArr.length > 0) {
-      const item = tempArr.shift();
-      if (item.id === id) {
-        return item;
-      } else if (item.children) {
-        tempArr.push(...item.children);
-      }
-    }
-    return null;
-  };
-
   const toggleNode = (id, active) => {
-    const newFAQs = toggleActivity(id, faqs, active);
-    setFaqs(newFAQs);
+    const newItems = toggleActivity(id, items, active);
+    setItems(newItems);
   };
 
   const activeItem = (id) => {
@@ -84,82 +37,85 @@ function FAQContainer({ data, title, loadChildren, loadContent }) {
 
   const lazyLoadPossibleContent = async (item) => {
     if (loadContent) {
-      setIsLoadingContent(true);
+      setCurrentItem({});
+      setLoadingContent(true);
       const content = await loadContent(item.id);
-      setIsLoadingContent(false);
+      setLoadingContent(false);
       item = {
         ...item,
-        content
+        content,
       };
     }
-    return item;
+    setCurrentItem(item);
   };
 
-  const openHelpDock = async (id) => {
+  const openHelpDock = (id) => {
     helpDockRef.setState({ isVisible: true });
-    const item = findNodeById(id, faqs);
+    const item = findNodeById(id, items);
     if (!item) {
-      setCurrentNode({
+      setCurrentItem({
         id: '0000',
-        content: `<div style="text-align: center;">Can't find item.</div>`
+        content: `<div style="text-align: center;">Can't find item.</div>`,
       });
     } else if (isNode(item)) {
-      const newFaq = await lazyLoadPossibleContent(item);
-      setCurrentNode(newFaq);
+      lazyLoadPossibleContent(item);
     } else {
       activeItem(id);
     }
   };
 
   const goBack = () => {
-    setCurrentNode(null);
+    setCurrentItem(null);
   };
 
   const handleOnClick = async (...args) => {
-    const [faq] = args;
-    if (!faq.children) {
+    const [item] = args;
+    if (isNode(item)) {
       // node
-      const newFaq = await lazyLoadPossibleContent(faq);
-      setCurrentNode(newFaq);
+      await lazyLoadPossibleContent(item);
     } else {
       // load children
       if (loadChildren) {
-        const children = await loadChildren(faq.id);
-        console.log('children', children);
-        faq.children = children;
-        setFaqs((preFAQs) => [...preFAQs]);
+        const children = await loadChildren(item.id);
+        item.children = children;
+        setItems((preItems) => [...preItems]);
       }
-      toggleNode(faq.id);
+      toggleNode(item.id);
     }
   };
 
   return (
-    <FAQDock ref={(e) => (helpDockRef = e)} isVisible>
-      <div className={styles.cpHelpContainer}>
-        <h3 className={styles.cpHelpTitle}>{title || 'FAQ Dock'}</h3>
-        {isNode(currentNode) ? (
-          <FAQContent
-            faq={currentNode}
-            goBack={goBack}
-            isLoadingContent={isLoadingContent}
-          />
-        ) : faqs.length === 0 ? (
-          <div>Loading...</div>
-        ) : (
-          <ul className={styles.cpHelpUl}>
-            {faqs.map((faq) => {
-              return (
-                <FAQComponent
-                  key={faq.id}
-                  faq={faq}
-                  onClick={handleOnClick}
-                  isNode={isNode}
-                />
-              );
-            })}
-          </ul>
-        )}
-      </div>
+    <FAQDock
+      ref={(e) => (helpDockRef = e)}
+      title={title}
+      config={{
+        isVisible: true,
+      }}
+    >
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : isNode(currentItem) ? (
+        <FAQContent
+          item={currentItem}
+          goBack={goBack}
+          isLoadingContent={isLoadingContent}
+        />
+      ) : items.length === 0 ? (
+        <div>No Items</div>
+      ) : (
+        <ul className={styles.cpHelpUl}>
+          {items.map((item) => {
+            return (
+              <FAQItem
+                key={item.id}
+                item={item}
+                onClick={handleOnClick}
+                isNode={isNode}
+              />
+            );
+          })}
+        </ul>
+      )}
     </FAQDock>
   );
 }

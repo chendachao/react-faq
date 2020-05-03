@@ -1,14 +1,19 @@
 name: NPM && Github NPM Publish
 
+# How to trigger this pipeline
+# 1. Change the 'version' in `package.json`, acctually any modification of `package.json` will trigger this pipeline
+# 2. Add tags like 'v1.0.11' or 'v2.0.5'
+
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'package.json'
+    tags:
+      - v1.*
+      - v2.*
   pull_request:
     branches: [ master ]
-
-# on:
-#   release:
-#     types: [published]
 
 jobs:
   publish-npm:

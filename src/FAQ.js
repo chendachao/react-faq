@@ -3,18 +3,18 @@ import marked from 'marked';
 
 import styles from './styles.module.css';
 
-export function FAQComponent({ faq, onClick, isNode }) {
+export function FAQItem({ item, onClick, isNode }) {
   const handleOnClick = (e, ...args) => {
     e.preventDefault();
     e.stopPropagation();
     onClick(...args);
   };
 
-  const nestedFAQs = (faq.children || []).map((faq) => {
+  const nestedItems = (item.children || []).map((item) => {
     return (
-      <FAQComponent
-        key={faq.id}
-        faq={faq}
+      <FAQItem
+        key={item.id}
+        item={item}
         onClick={onClick}
         isNode={isNode}
         type='child'
@@ -28,11 +28,11 @@ export function FAQComponent({ faq, onClick, isNode }) {
         <a
           href='#'
           className={styles.cpHelpCategoryText}
-          onClick={(e) => handleOnClick(e, faq)}
+          onClick={(e) => handleOnClick(e, item)}
         >
-          {faq.label}
+          {item.label}
           <span>
-            {!isNode(faq) && faq.active && (
+            {!isNode(item) && item.active && (
               <svg
                 version='1.1'
                 xmlns='http://www.w3.org/2000/svg'
@@ -46,7 +46,7 @@ export function FAQComponent({ faq, onClick, isNode }) {
                 />
               </svg>
             )}
-            {!isNode(faq) && !faq.active && (
+            {!isNode(item) && !item.active && (
               <svg
                 version='1.1'
                 xmlns='http://www.w3.org/2000/svg'
@@ -64,14 +64,17 @@ export function FAQComponent({ faq, onClick, isNode }) {
         </a>
       </div>
 
-      {faq.active && faq.children && faq.children.length === 0 && 'No content'}
+      {item.active && <ul className={styles.cpHelpUl}>{nestedItems}</ul>}
 
-      {faq.active && <ul className={styles.cpHelpUl}>{nestedFAQs}</ul>}
+      {item.active &&
+        item.children &&
+        item.children.length === 0 &&
+        'No content'}
     </li>
   );
 }
 
-export function FAQContent({ faq, isLoadingContent, goBack }) {
+export function FAQContent({ item, isLoadingContent, goBack }) {
   return (
     <div>
       <div className={styles.cpHelpGoBack} onClick={goBack}>
@@ -84,14 +87,14 @@ export function FAQContent({ faq, isLoadingContent, goBack }) {
         </svg>
         <span className={styles.cpHelpGoBackText}>Go back</span>
       </div>
-      {!isLoadingContent && !faq.children && !faq.content && 'No content'}
+      {!isLoadingContent && !item.children && !item.content && 'No content'}
       {isLoadingContent ? (
         <div>Loading...</div>
       ) : (
-        faq.content && (
+        item.content && (
           <div
             style={{ marginBottom: '10px' }}
-            dangerouslySetInnerHTML={{ __html: marked.parse(faq.content) }}
+            dangerouslySetInnerHTML={{ __html: marked.parse(item.content) }}
           />
         )
       )}

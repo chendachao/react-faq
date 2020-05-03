@@ -20,6 +20,9 @@
 
 .cpHelpContainer .cpHelpTitle {
   text-align: center;
+  font-size: larger;
+  font-weight: bold;
+  padding-bottom: 1rem;
 }
 
 .cpHelpContainer .cpHelpListItem {
