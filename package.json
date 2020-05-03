@@ -2,7 +2,7 @@
   "name": "react-faq",
   "homepage": "https://chendachao.github.io/react-faq",
   "version": "1.0.12",
-  "description": "Made with create-react-library",
+  "description": "React FAQ Dock",
   "author": "chendachao",
   "license": "MIT",
   "repository": "chendachao/react-faq",

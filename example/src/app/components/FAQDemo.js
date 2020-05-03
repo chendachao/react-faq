@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 
-import {FAQContainer} from 'react-faq';
+import ReactFAQ from 'react-faq';
 
 function FAQDemo() {
 
@@ -37,7 +37,7 @@ function FAQDemo() {
   }
 
   return (
-    <FAQContainer data={data} loadContent={loadContent}/>
+    <ReactFAQ data={data} loadContent={loadContent}/>
   )
 
 }
