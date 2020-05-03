@@ -1,6 +1,3 @@
-import {useEventListener} from "./useEventListener";
+import { useEventListener } from './useEventListener';
 
-export {
-  useEventListener
-}
-
+export { useEventListener };

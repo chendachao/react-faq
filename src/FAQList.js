@@ -1,16 +1,16 @@
-import React from 'react'
-import FAQ from './FAQ'
+import React from 'react';
+import FAQ from './FAQ';
 
-import styles from './styles.css'
+import styles from './styles.module.css';
 
 function FAQList({ data = [], onClick, isNode }) {
   return (
     <ul className={styles.cpHelpUl}>
       {data.map((faq) => {
-        return <FAQ key={faq.id} faq={faq} onClick={onClick} isNode={isNode} />
+        return <FAQ key={faq.id} faq={faq} onClick={onClick} isNode={isNode} />;
       })}
     </ul>
-  )
+  );
 }
 
-export default FAQList
+export default FAQList;

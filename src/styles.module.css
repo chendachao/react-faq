@@ -1,9 +1,99 @@
-/* add css module styles here (optional) */
+.cpHelpContainer * {
+  box-sizing: border-box;
+}
 
-.test {
-  margin: 2em;
-  padding: 0.5em;
-  border: 2px solid #000;
-  font-size: 2em;
+.cpHelpContainer {
+  font-size: 14px;
+}
+
+.cpHelpContainer .cpHelpUl,
+.cpHelpContainer .cpHelpListItem {
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 0;
+  padding: 0;
+}
+
+.cpHelpContainer .cpHelpListItem {
+  padding-bottom: 0;
+}
+
+.cpHelpContainer .cpHelpTitle {
   text-align: center;
+}
+
+.cpHelpContainer .cpHelpListItem {
+  margin: 0;
+  padding: 0;
+  padding-left: 11px;
+}
+
+.cpHelpContainer>.cpHelpUl>.cpHelpListItem {
+  padding-left: 0;
+}
+
+.cpHelpContainer img {
+  max-width: 100%;
+}
+
+.cpHelpCategoryTitle {}
+
+.cpHelpCategoryText {
+  color: #0073e8;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  position: relative;
+  margin-left: 0;
+  padding: 11px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 14px;
+}
+
+.cpHelpCategoryText:hover {
+  color: #0073e8;
+  text-decoration: underline;
+}
+
+.cpHelpCategoryIcon {
+  fill: currentColor;
+  width: 20px;
+  height: 18px;
+  margin-right: 5px;
+  position: absolute;
+  right: 5px;
+}
+
+.helpDockCloseIcon {
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.cpHelpGoBack {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #0073e8;
+  display: block;
+  margin-bottom: 12px;
+  outline: none;
+}
+
+.cpHelpGoBack:hover {
+  text-decoration: underline;
+}
+
+.cpHelpGoBackArrow {
+  fill: currentColor;
+  width: 20px;
+  height: 18px;
+  vertical-align: text-top;
+}
+
+.cpHelpGoBackText {
+  margin-left: 5px;
 }
