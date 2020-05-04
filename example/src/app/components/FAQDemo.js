@@ -1,15 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+import 'react-faq/dist/index.css';
 
 import ReactFAQ from 'react-faq';
 
 function FAQDemo() {
-
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
-   // load data at first mount
-   useEffect(() => {
+  // load data at first mount
+  useEffect(() => {
     (async () => {
       setLoading(true);
       setTimeout(async () => {
@@ -23,7 +24,7 @@ function FAQDemo() {
   const getFAQs = async (url = '/react-faq/assets/data/en/faqs.json') => {
     const response = await axios.get(url);
     return response.data;
-  }
+  };
 
   // const loadChildren = async (id) => {
   //   console.log('id', id);
@@ -45,12 +46,11 @@ function FAQDemo() {
         resolve(data.content);
       }, 500);
     });
-  }
+  };
 
   return (
-    <ReactFAQ data={data} loadContent={loadContent} isLoading={isLoading}/>
-  )
-
+    <ReactFAQ data={data} isLoading={isLoading} loadContent={loadContent} />
+  );
 }
 
 export default FAQDemo;

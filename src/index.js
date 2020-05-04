@@ -1,16 +1,32 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import FAQDock from './FAQDock';
 import { FAQItem, FAQContent } from './FAQ';
 import { useEventListener } from './hooks';
-import { isNode, toggleActivity, findNodeById } from './utils';
+import { isNode, toggleActivity, findNodeById, deepAssign } from './utils';
 
 import styles from './styles.module.css';
 
 function FAQContainer({ data, title, isLoading, loadChildren, loadContent }) {
-  let helpDockRef = useRef();
+  const defaultDockConfig = {
+    position: 'right',
+    isVisible: false,
+    fluid: false,
+    dimMode: 'opaque',
+    dimStyle: { background: 'transparent' },
+    size: 300,
+    dockStyle: {
+      top: 'auto',
+      bottom: 0,
+      height: '60%',
+      padding: '6px',
+    },
+  };
+
   const [items, setItems] = useState([]);
   const [currentItem, setCurrentItem] = useState();
   const [isLoadingContent, setLoadingContent] = useState(false);
+
+  const [dockConfig, setDockConfig] = useState(defaultDockConfig);
 
   useEffect(() => {
     setItems(data);
@@ -50,7 +66,7 @@ function FAQContainer({ data, title, isLoading, loadChildren, loadContent }) {
   };
 
   const openHelpDock = (id) => {
-    helpDockRef.setState({ isVisible: true });
+    toggleDockVisibility(true);
     const item = findNodeById(id, items);
     if (!item) {
       setCurrentItem({
@@ -64,8 +80,20 @@ function FAQContainer({ data, title, isLoading, loadChildren, loadContent }) {
     }
   };
 
-  const goBack = () => {
-    setCurrentItem(null);
+  const toggleDockVisibility = (isVisible) => {
+    setDockConfig((preConfig) => deepAssign({}, preConfig, { isVisible }));
+  };
+
+  const toggleDockHeight = (dockStyle) => {
+    setDockConfig((preConfig) => {
+      return deepAssign({}, preConfig, { dockStyle });
+    });
+  };
+
+  const handleDockSizeChange = (size) => {
+    setDockConfig((preConfig) => {
+      return deepAssign({}, preConfig, { size });
+    });
   };
 
   const handleOnClick = async (...args) => {
@@ -84,13 +112,17 @@ function FAQContainer({ data, title, isLoading, loadChildren, loadContent }) {
     }
   };
 
+  const goBack = () => {
+    setCurrentItem(null);
+  };
+
   return (
     <FAQDock
-      ref={(e) => (helpDockRef = e)}
       title={title}
-      config={{
-        isVisible: true,
-      }}
+      config={dockConfig}
+      handleVisibleChange={toggleDockVisibility}
+      handleSizeChange={handleDockSizeChange}
+      toggleHeight={toggleDockHeight}
     >
       {isLoading ? (
         <div>Loading...</div>

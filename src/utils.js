@@ -43,3 +43,18 @@ export const findNodeById = (id, nodes) => {
   }
   return null;
 };
+
+export function deepAssign(target, ...sources) {
+  for (const source of sources) {
+    for (const k in source) {
+      const vs = source[k];
+      const vt = target[k];
+      if (Object(vs) === vs && Object(vt) === vt) {
+        target[k] = deepAssign(vt, vs);
+        continue;
+      }
+      target[k] = source[k];
+    }
+  }
+  return target;
+}
