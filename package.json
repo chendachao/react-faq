@@ -1,7 +1,7 @@
 {
   "name": "react-faq",
   "homepage": "https://chendachao.github.io/react-faq",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "React FAQ Dock",
   "author": "chendachao",
   "license": "MIT",
@@ -26,6 +26,11 @@
     "deploy:local": "gh-pages -d example/build"
   },
   "peerDependencies": {
+    "marked": "^1.0.0",
+    "react": "^16.0.0",
+    "react-dock": "^0.2.4"
+  },
+  "dependencies": {
     "marked": "^1.0.0",
     "react": "^16.0.0",
     "react-dock": "^0.2.4"
