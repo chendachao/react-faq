@@ -17,12 +17,12 @@ npm install --save react-faq
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'react-faq'
-import 'react-faq/dist/index.css'
+import ReactFAQ from 'react-faq';
+import 'react-faq/dist/index.css';
 
 class Example extends Component {
   render() {
-    return <MyComponent />
+    return <ReactFAQ data={data} />
   }
 }
 ```

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import 'react-faq/dist/index.css';
-
 import ReactFAQ from 'react-faq';
+import 'react-faq/dist/index.css';
 
 function FAQDemo() {
   const [data, setData] = useState([]);

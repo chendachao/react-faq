@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "marked": "^1.0.0",
-    "react": "^16.13.1",
     "react-dock": "^0.2.4"
   },
   "devDependencies": {
