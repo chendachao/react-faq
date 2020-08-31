@@ -35,10 +35,9 @@ function FAQContainer({ data, title, isLoading, loadChildren, loadContent }) {
   useEventListener(document, 'click', (e) => {
     const { target } = e;
     const isHanlder = target.hasAttribute('data-cp-help-dock');
-
     if (isHanlder) {
       const cpFaqId = target.getAttribute('data-cp-faq-id');
-      openHelpDock(+cpFaqId);
+      openHelpDock(cpFaqId);
     }
   });
 

@@ -33,9 +33,9 @@ export const toggleActivity = (id, items, active /* default */) => {
 
 export const findNodeById = (id, nodes) => {
   const tempArr = [...nodes];
-  while (tempArr.length > 0) {
+  while (tempArr.length) {
     const item = tempArr.shift();
-    if (item.id === id) {
+    if (item.id == id) {
       return item;
     } else if (item.children) {
       tempArr.push(...item.children);
