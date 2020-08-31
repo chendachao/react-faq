@@ -10,7 +10,6 @@
 // export default App
 
 import './App.css';
-import 'react-faq/dist/index.css'
 
 import React, { useState, useEffect }  from 'react';
 import {
