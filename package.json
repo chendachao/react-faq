@@ -21,7 +21,7 @@
     "test:lint": "eslint .",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
-    "predeploy": "cd example && yarn install && yarn build",
+    "predeploy": "yarn build && cd example && yarn install && yarn build",
     "deploy": "gh-pages -d example/build -u 'Dachao Chen <chendachao@outlook.com>' -r https://chendachao:$GITHUB_TOKEN@github.com/chendachao/react-faq.git",
     "deploy:local": "gh-pages -d example/build"
   },

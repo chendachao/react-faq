@@ -17,11 +17,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install and build
-        run: |
-          yarn install
-          yarn build
-          cd example && yarn build
       - name: Deploy
         run: yarn deploy
         env:
