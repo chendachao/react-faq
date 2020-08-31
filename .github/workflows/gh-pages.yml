@@ -20,6 +20,7 @@ jobs:
       - name: Install and build
         run: |
           yarn install
+          yarn build
           cd example && yarn build
       - name: Deploy
         run: yarn deploy
