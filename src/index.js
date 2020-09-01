@@ -67,15 +67,19 @@ function FAQContainer({ data, title, isLoading, loadChildren, loadContent }) {
   const openHelpDock = (id) => {
     toggleDockVisibility(true);
     const item = findNodeById(id, items);
-    if (!item) {
-      setCurrentItem({
-        id: '0000',
-        content: `<div style="text-align: center;">Can't find item.</div>`,
-      });
-    } else if (isNode(item)) {
-      lazyLoadPossibleContent(item);
+    if (isLoading) {
+      setCurrentItem(null);
     } else {
-      activeItem(id);
+      if (!item) {
+        setCurrentItem({
+          id: '0000',
+          content: `<div style="text-align: center;">Can't find item.</div>`,
+        });
+      } else if (isNode(item)) {
+        lazyLoadPossibleContent(item);
+      } else {
+        activeItem(id);
+      }
     }
   };
 

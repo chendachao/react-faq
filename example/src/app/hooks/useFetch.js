@@ -15,7 +15,7 @@ export function useFetch({url, options}) {
         });
         setData(response.data);
         setLoading(false);
-      }, 300);
+      }, 3000);
     })();
   }, []);
 

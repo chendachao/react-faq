@@ -21,9 +21,7 @@ const getDefaultLang = () => {
 };
 
 const request = async (url, options) => {
-  const response = await axios.get(url, {
-    ...options
-  });
+  const response = await axios.get(url);
   return response.data;
 };
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import { FormattedMessage } from "react-intl";
-import { fmt } from "../../App";
+import { useIntl, FormattedMessage } from "react-intl";
 
 function Home() {
+  const intl = useIntl();
   return (
     <div>
       <h2><FormattedMessage id="home.title" /></h2>
-      <p>{fmt({id: "home.declarative.p1"})}</p>
+      <p>{intl.formatMessage({id: "home.declarative.p1"})}</p>
     </div>
   );
 }

@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect }  from 'react';
 import {
   // BrowserRouter as Router,
@@ -14,13 +12,12 @@ import {
   RawIntlProvider,
   FormattedMessage,
 } from 'react-intl';
-import axios from 'axios';
 
 import Lodable from "@loadable/component";
 import Home from './app/pages/Home';
 import FAQDemo from "./app/components/FAQDemo";
 import InterceptorRoute from "./InterceptorRoute";
-import { getDefaultLang,  } from "./app/utils";
+import { getDefaultLang, request } from "./app/utils";
 
 import './App.css';
 
@@ -30,9 +27,8 @@ export function Loading() {
 
 const getI18nMessages = async lang => {
   const url = `/react-faq/assets/locales/${lang}.json`;
-  const response = await axios.get(url);
-  // console.log('data', response.data);
-  return response.data;
+  const response = await request(url);
+  return response;
 };
 
 const initialLocale = getDefaultLang() || 'en';
@@ -56,14 +52,11 @@ export let intl = createIntl(
   cache
 )
 
-export let fmt = intl.formatMessage;
-
 const updateIntl = (locale, messages) => {
   intl = createIntl(
     {locale, messages},
     cache
   )
-  fmt = intl.formatMessage;
   document.documentElement.lang = locale;
 }
 
@@ -133,8 +126,8 @@ function App() {
   };
 
   const loadContext = async (url, component, path) => {
-    const response = await axios.get(url);
-    return response.data;
+    const response = await request(url);
+    return response;
   }
 
   if(!messages) {
@@ -169,8 +162,6 @@ function App() {
             </div>
           </section>
 
-          <FAQDemo/>
-
           <hr/>
           <Router>
             <ul>
@@ -198,6 +189,8 @@ function App() {
             </Switch>
           </Router>
         </div>
+
+        <FAQDemo/>
 
     </RawIntlProvider>
     )
