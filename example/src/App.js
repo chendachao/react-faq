@@ -26,18 +26,6 @@ export function Loading() {
 
 const initialLocale = getDefaultLang() || 'en';
 
-const fetchI18nMessages = async (lang = initialLocale) => {
-  const url = `/react-faq/assets/locales/${lang}.json`;
-  let response;
-  try {
-    response = await request(url);
-  } catch (error) {
-
-  } finally {
-    return response;
-  }
-};
-
 const languages = [
   {
     key: 'en',
@@ -91,6 +79,27 @@ const createRoutesConfig = (locale) => {
 function App() {
 
   const [isLoading18nMessages, setIsLoading18nMessages] = useState(false);
+
+  const fetchI18nMessages = async (lang = initialLocale) => {
+    const url = `/react-faq/assets/locales/${lang}.json`;
+    let response;
+    const cacheID = url;
+    try {
+      let temp = JSON.parse(localStorage.getItem(cacheID));
+      if(temp && temp.expires > Date.now()) {
+        return response = temp.data;
+      }
+      localStorage.removeItem(cacheID);
+      response = await request(url);
+      localStorage.setItem(cacheID, JSON.stringify({
+        expires: Date.now() + 0.5 * 60 * 1000,
+        data: response
+      }));
+      return response;
+    } catch (error) {
+      return response;
+    }
+  };
 
   const switchLocale = async newLocale => {
     setIsLoading18nMessages(true);

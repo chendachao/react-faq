@@ -13,7 +13,8 @@
     "react-redux": "link:../node_modules/react-redux",
     "react-router-dom": "link:../node_modules/react-router-dom",
     "react-scripts": "link:../node_modules/react-scripts",
-    "redux": "link:../node_modules/redux"
+    "redux": "link:../node_modules/redux",
+    "lodash": "link:../node_modules/lodash"
   },
   "scripts": {
     "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
