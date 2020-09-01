@@ -9,7 +9,7 @@ let intl;
 const generateIntl = props => {
   intl = createIntl(
     props,
-    cache
+    cache,
   );
   return intl;
 }

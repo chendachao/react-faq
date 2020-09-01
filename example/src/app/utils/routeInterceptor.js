@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Route, useLocation } from 'react-router-dom';
 
-function InterceptorRoute({loadContext, loading, ...route}) {
+function RouteInterceptor({loadContext, loading, ...route}) {
 
   const location = useLocation();
   const [context, setContext] = useState();
@@ -10,6 +10,7 @@ function InterceptorRoute({loadContext, loading, ...route}) {
 
   useEffect(() => {
     console.log('location changed to', location.pathname);
+    setLocationChange(false);
     (async () => {
       // setTimeout(async () => {
         const {config} = route;
@@ -23,12 +24,7 @@ function InterceptorRoute({loadContext, loading, ...route}) {
           }
         }
       // }, 1000);
-
-      setLocationChange(false);
-      setTimeout(() => {
-        setLocationChange(true);
-      }, 1000);
-
+      setLocationChange(true);
     })();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
@@ -53,4 +49,4 @@ function InterceptorRoute({loadContext, loading, ...route}) {
   )
 }
 
-export default InterceptorRoute;
+export default RouteInterceptor;

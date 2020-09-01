@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import {
+  IntlProvider,
   RawIntlProvider,
   FormattedMessage,
 } from 'react-intl';
@@ -14,7 +15,7 @@ import {
 import Lodable from "@loadable/component";
 import Home from './app/pages/Home';
 import FAQDemo from "./app/components/FAQDemo";
-import InterceptorRoute from "./InterceptorRoute";
+import RouteInterceptor from "./app/utils/routeInterceptor";
 import { getDefaultLang, request, withCacheFetch } from "./app/utils";
 import { generateIntl, intl } from "./intl";
 
@@ -38,7 +39,16 @@ const languages = [
 ];
 
 const updateIntl = (locale = initialLocale, messages = '') => {
-  generateIntl({locale, messages});
+  generateIntl({locale, messages,
+    onError: (err) => {
+      if (err.code === "MISSING_TRANSLATION") {
+        console.warn("Missing translation", err.message);
+        return;
+      }
+      // throw err;
+      console.warn(err);
+    }
+  });
   document.documentElement.lang = locale;
 }
 
@@ -110,17 +120,11 @@ function App() {
     })();
   }, []);
 
-  if(isLoading18nMessages) {
+  if(!intl.messages) {
     return <div>Loading i18n...</div>;
   } else {
     return (
-      <RawIntlProvider value={intl} onError={(err) => {
-        if (err.code === "MISSING_TRANSLATION") {
-          console.warn("Missing translation", err.message);
-          return;
-        }
-        throw err;
-      }}>
+      <RawIntlProvider value={intl} locale="en" defaultLocale="en-US">
 
         <div style={{ textAlign: 'right' }}>
           <select
@@ -165,7 +169,7 @@ function App() {
 
             <Switch>
               {createRoutesConfig(intl.locale).map(route => (
-                  <InterceptorRoute
+                  <RouteInterceptor
                     key={route.path}
                     {...route}
                     loadContext={loadContext}

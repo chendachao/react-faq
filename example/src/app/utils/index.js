@@ -21,11 +21,11 @@ const getDefaultLang = () => {
 };
 
 const request = async (url, options) => {
-  const response = await axios.get(url);
+  const response = await axios.get(url, options);
   return response.data;
 };
 
-const withCacheFetch = async (fn, url) => {
+const withCacheFetch = async (fn, url, args) => {
   let response;
   const cacheID = url;
   try {
@@ -34,7 +34,7 @@ const withCacheFetch = async (fn, url) => {
       return response = temp.data;
     }
     localStorage.removeItem(cacheID);
-    response = await fn(url);
+    response = await fn(url, args);
     localStorage.setItem(cacheID, JSON.stringify({
       expires: Date.now() + 0.5 * 60 * 1000,
       data: response

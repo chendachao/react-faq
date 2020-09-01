@@ -4,11 +4,10 @@ import ReactFAQ from 'react-faq';
 import 'react-faq/dist/index.css';
 
 import { useFetch } from "../hooks/useFetch";
-import { request } from "../utils";
 
 function FAQDemo() {
   // load data at first mount
-  const [data, isLoading] = useFetch({
+  const [data, isLoading, fetchData] = useFetch({
     url: '/react-faq/assets/data/en/faqs.json'
   });
 
@@ -17,7 +16,7 @@ function FAQDemo() {
     const url = '/react-faq/assets/data/en/faq-content.json';
     return new Promise(async (resolve, reject) => {
       setTimeout(async () => {
-        const data = await request(url);
+        const data = await fetchData(url);
         resolve(data.content);
       }, 500);
     });
