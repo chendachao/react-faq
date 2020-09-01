@@ -1,8 +1,8 @@
 {
   "home.title": "主页",
   "home.link.home": "主页",
-  "home.link.demo": "例子1",
-  "home.link.demo2": "例子2",
+  "home.link.page1": "页面1",
+  "home.link.page2": "页面2",
   "home.welcome": "欢迎{name}!",
   "home.declarative": "棒棒哒",
   "home.declarative.p1": "国际化",

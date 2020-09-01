@@ -1,4 +1,5 @@
 
+import axios from 'axios';
 
 const getDefaultLang = () => {
   let lang = window.navigator.languages
@@ -19,6 +20,14 @@ const getDefaultLang = () => {
   return shortLang;
 };
 
+const request = async (url, options) => {
+  const response = await axios.get(url, {
+    ...options
+  });
+  return response.data;
+};
+
 export {
-  getDefaultLang
+  getDefaultLang,
+  request
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from "axios";
 
 // https://www.pluralsight.com/guides/hierarchy-of-components-and-how-to-get-async-data
@@ -9,11 +9,13 @@ export function useFetch({url, options}) {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const response = await axios.get(url, {
-        ...options
-      });
-      setLoading(false);
-      setData(response.data);
+      setTimeout(async () => {
+        const response = await axios.get(url, {
+          ...options
+        });
+        setData(response.data);
+        setLoading(false);
+      }, 300);
     })();
   }, []);
 

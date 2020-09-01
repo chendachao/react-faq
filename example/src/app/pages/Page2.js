@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Demo2(props) {
+function Page2(props) {
   const {context: page, locationChanged} = props;
 
   if(locationChanged) {
@@ -14,4 +14,4 @@ function Demo2(props) {
   );
 }
 
-export default Demo2;
+export default Page2;

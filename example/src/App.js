@@ -1,15 +1,4 @@
-// import React from 'react'
 
-// import { ExampleComponent } from 'react-faq'
-// import 'react-faq/dist/index.css'
-
-// const App = () => {
-//   return <ExampleComponent text="Create React Library Example 😄" />
-// }
-
-// export default App
-
-import './App.css';
 
 import React, { useState, useEffect }  from 'react';
 import {
@@ -28,10 +17,12 @@ import {
 import axios from 'axios';
 
 import Lodable from "@loadable/component";
-import Home from './app/components/Home';
+import Home from './app/pages/Home';
 import FAQDemo from "./app/components/FAQDemo";
 import InterceptorRoute from "./InterceptorRoute";
-import { getDefaultLang } from "./app/utils";
+import { getDefaultLang,  } from "./app/utils";
+
+import './App.css';
 
 export function Loading() {
   return <div><FormattedMessage id="loading.message"/>...</div>
@@ -89,19 +80,19 @@ const createRoutesConfig = (locale) => {
       component: Home,
     },
     {
-      path: '/demo',
-      component: lazyLoadComponent(import('./app/components/Demo')),
+      path: '/page1',
+      component: lazyLoadComponent(import('./app/pages/Page1')),
       config: {
-        url: `/react-faq/assets/data/${locale}/demo.json`,
-        name: 'Demo'
+        url: `/react-faq/assets/data/${locale}/page1.json`,
+        name: 'Page1'
       }
     },
     {
-      path: '/demo2',
-      component: lazyLoadComponent(import('./app/components/Demo2')),
+      path: '/page2',
+      component: lazyLoadComponent(import('./app/pages/Page2')),
       config: {
-        url: `/react-faq/assets/data/${locale}/demo2.json`,
-        name: 'Demo2'
+        url: `/react-faq/assets/data/${locale}/page2.json`,
+        name: 'Page2'
       }
     },
   ];
@@ -174,7 +165,6 @@ function App() {
                 <h3><FormattedMessage id="home.declarative" />
                   <button className="help-link" data-cp-help-dock data-cp-faq-id="67">?</button>
                 </h3>
-                <p><FormattedMessage id="home.declarative.p1" /></p>
               </div>
             </div>
           </section>
@@ -188,10 +178,10 @@ function App() {
                 <Link to="/"><FormattedMessage id="home.link.home"/></Link>
               </li>
               <li>
-                <Link to="/demo"><FormattedMessage id="home.link.demo"/></Link>
+                <Link to="/page1"><FormattedMessage id="home.link.page1"/></Link>
               </li>
               <li>
-                <Link to="/demo2"><FormattedMessage id="home.link.demo2"/></Link>
+                <Link to="/page2"><FormattedMessage id="home.link.page2"/></Link>
               </li>
             </ul>
 

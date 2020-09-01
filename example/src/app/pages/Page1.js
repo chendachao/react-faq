@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Demo extends Component {
+class Page1 extends Component {
   render() {
     const {context: page} = this.props;
     return (
@@ -8,10 +8,10 @@ class Demo extends Component {
         <h1>{page.section1.title}</h1>
         <img style={{width: `100%`}} src={`${page.section1.imgURL}?w=1000`} alt="img"/>
         <div dangerouslySetInnerHTML={{__html: page.section1.content}}></div>
-      </div>  
+      </div>
     )
   }
 }
 
-export default Demo;
+export default Page1;
 
