@@ -6,5 +6,5 @@
   "home.welcome": "欢迎{name}!",
   "home.declarative": "棒棒哒",
   "home.declarative.p1": "国际化",
-  "loading.message": "加载中"
+  "message.loading": "加载中"
 }
