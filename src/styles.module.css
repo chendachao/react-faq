@@ -61,11 +61,10 @@
 
 .cpHelpCategoryIcon {
   fill: currentColor;
-  width: 20px;
-  height: 18px;
-  margin-right: 5px;
+  width: 14px;
+  height: 14px;
   position: absolute;
-  right: 5px;
+  right: 1rem;
 }
 
 .helpDockCloseIcon {
@@ -86,6 +85,8 @@
 .helpDockMaxMinIcon svg {
   fill: currentColor;
   width: 16px;
+  height: 16px;
+  vertical-align: super;
 }
 
 .cpHelpGoBack {
@@ -105,9 +106,9 @@
 
 .cpHelpGoBackArrow {
   fill: currentColor;
-  width: 16px;
-  height: 18px;
-  vertical-align: middle;
+  width: 14px;
+  height: 14px;
+  vertical-align: bottom;
 }
 
 .cpHelpGoBackText {
