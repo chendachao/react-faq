@@ -15,7 +15,7 @@ import Lodable from "@loadable/component";
 import Home from './app/pages/Home';
 import FAQDemo from "./app/components/FAQDemo";
 import InterceptorRoute from "./InterceptorRoute";
-import { getDefaultLang, request } from "./app/utils";
+import { getDefaultLang, request, withCacheFetch } from "./app/utils";
 import { generateIntl, intl } from "./intl";
 
 import './App.css';
@@ -81,31 +81,9 @@ function App() {
   const [isLoading18nMessages, setIsLoading18nMessages] = useState(false);
   const [locale, setLocale] = useState(initialLocale);
 
-  const useCacheFetch = () => {
-
-  }
-
   const fetchTranslation = async (lang = initialLocale) => {
     const url = `/react-faq/assets/locales/${lang}.json`;
-    let response;
-    // const cacheID = url;
-    // try {
-    //   let temp = JSON.parse(localStorage.getItem(cacheID));
-    //   // if(temp && temp.expires > Date.now()) {
-    //   //   return response = temp.data;
-    //   // }
-    //   localStorage.removeItem(cacheID);
-    //   response = await request(url);
-    //   localStorage.setItem(cacheID, JSON.stringify({
-    //     expires: Date.now() + 0.5 * 60 * 1000,
-    //     data: response
-    //   }));
-    //   return response;
-    // } catch (error) {
-    //   return response;
-    // }
-
-    response = await request(url);
+    let response = await withCacheFetch(request, url);
     return response;
   };
 
@@ -125,7 +103,10 @@ function App() {
   // first update
   useEffect(() => {
     (async () => {
-      await switchLocale(initialLocale);
+      setIsLoading18nMessages(true);
+      const messages = await fetchTranslation();
+      updateIntl('', messages);
+      setIsLoading18nMessages(false);
     })();
   }, []);
 

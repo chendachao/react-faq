@@ -25,7 +25,28 @@ const request = async (url, options) => {
   return response.data;
 };
 
+const withCacheFetch = async (fn, url) => {
+  let response;
+  const cacheID = url;
+  try {
+    let temp = JSON.parse(localStorage.getItem(cacheID));
+    if(temp && temp.expires > Date.now()) {
+      return response = temp.data;
+    }
+    localStorage.removeItem(cacheID);
+    response = await fn(url);
+    localStorage.setItem(cacheID, JSON.stringify({
+      expires: Date.now() + 0.5 * 60 * 1000,
+      data: response
+    }));
+    return response;
+  } catch (error) {
+    return response;
+  }
+}
+
 export {
   getDefaultLang,
-  request
+  request,
+  withCacheFetch
 }
