@@ -37,7 +37,7 @@ const languages = [
   },
 ];
 
-const updateIntl = (locale = initialLocale, messages) => {
+const updateIntl = (locale = initialLocale, messages = '') => {
   generateIntl({locale, messages});
   document.documentElement.lang = locale;
 }
@@ -79,31 +79,40 @@ const createRoutesConfig = (locale) => {
 function App() {
 
   const [isLoading18nMessages, setIsLoading18nMessages] = useState(false);
+  const [locale, setLocale] = useState(initialLocale);
 
-  const fetchI18nMessages = async (lang = initialLocale) => {
+  const useCacheFetch = () => {
+
+  }
+
+  const fetchTranslation = async (lang = initialLocale) => {
     const url = `/react-faq/assets/locales/${lang}.json`;
     let response;
-    const cacheID = url;
-    try {
-      let temp = JSON.parse(localStorage.getItem(cacheID));
-      if(temp && temp.expires > Date.now()) {
-        return response = temp.data;
-      }
-      localStorage.removeItem(cacheID);
-      response = await request(url);
-      localStorage.setItem(cacheID, JSON.stringify({
-        expires: Date.now() + 0.5 * 60 * 1000,
-        data: response
-      }));
-      return response;
-    } catch (error) {
-      return response;
-    }
+    // const cacheID = url;
+    // try {
+    //   let temp = JSON.parse(localStorage.getItem(cacheID));
+    //   // if(temp && temp.expires > Date.now()) {
+    //   //   return response = temp.data;
+    //   // }
+    //   localStorage.removeItem(cacheID);
+    //   response = await request(url);
+    //   localStorage.setItem(cacheID, JSON.stringify({
+    //     expires: Date.now() + 0.5 * 60 * 1000,
+    //     data: response
+    //   }));
+    //   return response;
+    // } catch (error) {
+    //   return response;
+    // }
+
+    response = await request(url);
+    return response;
   };
 
   const switchLocale = async newLocale => {
     setIsLoading18nMessages(true);
-    const messages = await fetchI18nMessages(newLocale);
+    setLocale(newLocale);
+    const messages = await fetchTranslation(newLocale);
     updateIntl(newLocale, messages);
     setIsLoading18nMessages(false);
   };
@@ -124,13 +133,19 @@ function App() {
     return <div>Loading i18n...</div>;
   } else {
     return (
-      <RawIntlProvider value={intl}>
+      <RawIntlProvider value={intl} onError={(err) => {
+        if (err.code === "MISSING_TRANSLATION") {
+          console.warn("Missing translation", err.message);
+          return;
+        }
+        throw err;
+      }}>
 
         <div style={{ textAlign: 'right' }}>
           <select
             name="locale"
             id="locale"
-            defaultValue={initialLocale}
+            value={locale}
             onChange={event => switchLocale(event.target.value)}>
             {languages.map(lang => (
               <option key={lang.key} value={lang.key}>
