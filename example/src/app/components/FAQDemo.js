@@ -24,6 +24,7 @@ function FAQDemo() {
 
   return (
     <ReactFAQ
+      title="FAQs"
       data={data}
       isLoading={isLoading}
       loadContent={loadContent}

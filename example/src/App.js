@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   // BrowserRouter as Router,
   HashRouter as Router,
@@ -7,22 +7,23 @@ import {
   Link,
 } from 'react-router-dom';
 
-import {
-  IntlProvider,
-  FormattedMessage,
-} from 'react-intl';
+import { IntlProvider, FormattedMessage } from 'react-intl';
 
-import Lodable from "@loadable/component";
+import Lodable from '@loadable/component';
 import Home from './app/pages/Home';
-import FAQDemo from "./app/components/FAQDemo";
+import FAQDemo from './app/components/FAQDemo';
 // import RouteInterceptor from "./app/utils/routeInterceptor";
-import { getDefaultLang, request, withCacheFetch } from "./app/utils";
-import withStaticContext from "./app/hoc/withStaticContext"
+import { getDefaultLang, request, withCacheFetch } from './app/utils';
+import withStaticContext from './app/hoc/withStaticContext';
 
 import './App.css';
 
 export function Loading() {
-  return <div><FormattedMessage id="message.loading"/></div>
+  return (
+    <div>
+      <FormattedMessage id='message.loading' />
+    </div>
+  );
 }
 
 const initialLocale = getDefaultLang() || 'en';
@@ -38,10 +39,10 @@ const languages = [
   },
 ];
 
-const lazyLoadComponent = component =>
+const lazyLoadComponent = (component) =>
   Lodable(() => component, {
-    fallback: <Loading/>
-  })
+    fallback: <Loading />,
+  });
 
 const createRoutes = (locale) => {
   const routes = [
@@ -58,14 +59,13 @@ const createRoutes = (locale) => {
       //   name: 'Page1'
       // }
       component: withStaticContext(
-        lazyLoadComponent(
-          import('./app/pages/Page1')),
-          {
-            url: `/react-faq/assets/data/${locale}/page1.json`,
-            name: 'Page1',
-            fallback: <Loading/>
-          }
-        )
+        lazyLoadComponent(import('./app/pages/Page1')),
+        {
+          url: `/react-faq/assets/data/${locale}/page1.json`,
+          name: 'Page1',
+          fallback: <Loading />,
+        }
+      ),
     },
     {
       path: '/page2',
@@ -74,18 +74,20 @@ const createRoutes = (locale) => {
       //   url: `/react-faq/assets/data/${locale}/page2.json`,
       //   name: 'Page2'
       // },
-      component: withStaticContext(lazyLoadComponent(import('./app/pages/Page2')), {
-        url: `/react-faq/assets/data/${locale}/page2.json`,
-        name: 'Page2',
-        fallback: <Loading/>
-      })
+      component: withStaticContext(
+        lazyLoadComponent(import('./app/pages/Page2')),
+        {
+          url: `/react-faq/assets/data/${locale}/page2.json`,
+          name: 'Page2',
+          fallback: <Loading />,
+        }
+      ),
     },
   ];
   return routes;
-}
+};
 
 function App() {
-
   const [locale, setLocale] = useState(initialLocale);
   const [messages, setMessages] = useState('');
 
@@ -95,7 +97,7 @@ function App() {
     return response;
   };
 
-  const switchLocale = async newLocale => {
+  const switchLocale = async (newLocale) => {
     const msg = await fetchTranslation(newLocale);
     setLocale(newLocale);
     setMessages(msg);
@@ -110,20 +112,20 @@ function App() {
     })();
   }, []);
 
-  if(!messages) {
+  if (!messages) {
     return <div>Loading i18n...</div>;
   } else {
     return (
       // <RawIntlProvider value={intl} locale="en" defaultLocale="en-US">
-      <IntlProvider locale={locale} defaultLocale="en-US" messages={messages}>
-
+      <IntlProvider locale={locale} defaultLocale='en-US' messages={messages}>
         <div style={{ textAlign: 'right' }}>
           <select
-            name="locale"
-            id="locale"
+            name='locale'
+            id='locale'
             value={locale}
-            onChange={event => switchLocale(event.target.value)}>
-            {languages.map(lang => (
+            onChange={(event) => switchLocale(event.target.value)}
+          >
+            {languages.map((lang) => (
               <option key={lang.key} value={lang.key}>
                 {lang.label}
               </option>
@@ -132,29 +134,46 @@ function App() {
         </div>
 
         <div>
-
           <section>
             <div>
               <div>
-                <h2><FormattedMessage id="home.welcome" values={{name: 'React.js'}} /></h2>
-                <h3><FormattedMessage id="home.declarative" />
-                  <button className="help-link" data-cp-help-dock data-cp-faq-id="67">?</button>
+                <h2>
+                  <FormattedMessage
+                    id='home.welcome'
+                    values={{ name: 'React.js' }}
+                  />
+                </h2>
+                <h3>
+                  <FormattedMessage id='home.declarative' />
+                  <button
+                    className='help-link'
+                    data-cp-help-dock
+                    data-cp-faq-id='67'
+                  >
+                    ?
+                  </button>
                 </h3>
               </div>
             </div>
           </section>
 
-          <hr/>
+          <hr />
           <Router>
             <ul>
               <li>
-                <Link to="/"><FormattedMessage id="home.link.home"/></Link>
+                <Link to='/'>
+                  <FormattedMessage id='home.link.home' />
+                </Link>
               </li>
               <li>
-                <Link to="/page1"><FormattedMessage id="home.link.page1"/></Link>
+                <Link to='/page1'>
+                  <FormattedMessage id='home.link.page1' />
+                </Link>
               </li>
               <li>
-                <Link to="/page2"><FormattedMessage id="home.link.page2"/></Link>
+                <Link to='/page2'>
+                  <FormattedMessage id='home.link.page2' />
+                </Link>
               </li>
             </ul>
 
@@ -181,11 +200,10 @@ function App() {
           </Router>
         </div>
 
-        <FAQDemo/>
-
-    </IntlProvider>
-    // </RawIntlProvider>
-    )
+        <FAQDemo />
+      </IntlProvider>
+      // </RawIntlProvider>
+    );
   }
 }
 
