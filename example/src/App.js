@@ -2,6 +2,7 @@ import React, { useState, useEffect }  from 'react';
 import {
   // BrowserRouter as Router,
   HashRouter as Router,
+  Route,
   Switch,
   Link,
 } from 'react-router-dom';
@@ -14,8 +15,9 @@ import {
 import Lodable from "@loadable/component";
 import Home from './app/pages/Home';
 import FAQDemo from "./app/components/FAQDemo";
-import RouteInterceptor from "./app/utils/routeInterceptor";
+// import RouteInterceptor from "./app/utils/routeInterceptor";
 import { getDefaultLang, request, withCacheFetch } from "./app/utils";
+import withStaticContext from "./app/hoc/withStaticContext"
 
 import './App.css';
 
@@ -41,7 +43,7 @@ const lazyLoadComponent = component =>
     fallback: <Loading/>
   })
 
-const createRoutesConfig = (locale) => {
+const createRoutes = (locale) => {
   const routes = [
     {
       path: '/',
@@ -50,19 +52,33 @@ const createRoutesConfig = (locale) => {
     },
     {
       path: '/page1',
-      component: lazyLoadComponent(import('./app/pages/Page1')),
-      config: {
-        url: `/react-faq/assets/data/${locale}/page1.json`,
-        name: 'Page1'
-      }
+      // component: lazyLoadComponent(import('./app/pages/Page1')),
+      // config: {
+      //   url: `/react-faq/assets/data/${locale}/page1.json`,
+      //   name: 'Page1'
+      // }
+      component: withStaticContext(
+        lazyLoadComponent(
+          import('./app/pages/Page1')),
+          {
+            url: `/react-faq/assets/data/${locale}/page1.json`,
+            name: 'Page1',
+            fallback: <Loading/>
+          }
+        )
     },
     {
       path: '/page2',
-      component: lazyLoadComponent(import('./app/pages/Page2')),
-      config: {
+      // component: lazyLoadComponent(import('./app/pages/Page2')),
+      // config: {
+      //   url: `/react-faq/assets/data/${locale}/page2.json`,
+      //   name: 'Page2'
+      // },
+      component: withStaticContext(lazyLoadComponent(import('./app/pages/Page2')), {
         url: `/react-faq/assets/data/${locale}/page2.json`,
-        name: 'Page2'
-      }
+        name: 'Page2',
+        fallback: <Loading/>
+      })
     },
   ];
   return routes;
@@ -71,7 +87,7 @@ const createRoutesConfig = (locale) => {
 function App() {
 
   const [locale, setLocale] = useState(initialLocale);
-  const [msg, setMsg] = useState('');
+  const [messages, setMessages] = useState('');
 
   const fetchTranslation = async (lang = initialLocale) => {
     const url = `/react-faq/assets/locales/${lang}.json`;
@@ -80,31 +96,26 @@ function App() {
   };
 
   const switchLocale = async newLocale => {
-    const messages = await fetchTranslation(newLocale);
+    const msg = await fetchTranslation(newLocale);
     setLocale(newLocale);
-    setMsg(messages);
+    setMessages(msg);
     document.documentElement.lang = locale;
   };
-
-  const loadContext = async (url, component, path) => {
-    const response = await request(url);
-    return response;
-  }
 
   // first update
   useEffect(() => {
     (async () => {
-      const messages = await fetchTranslation();
-      setMsg(messages);
+      const msg = await fetchTranslation();
+      setMessages(msg);
     })();
   }, []);
 
-  if(!msg) {
+  if(!messages) {
     return <div>Loading i18n...</div>;
   } else {
     return (
       // <RawIntlProvider value={intl} locale="en" defaultLocale="en-US">
-      <IntlProvider locale={locale} defaultLocale="en-US" messages={msg}>
+      <IntlProvider locale={locale} defaultLocale="en-US" messages={messages}>
 
         <div style={{ textAlign: 'right' }}>
           <select
@@ -148,7 +159,7 @@ function App() {
             </ul>
 
             <Switch>
-              {createRoutesConfig(locale).map(route => (
+              {/* {createRoutesConfig(locale).map(route => (
                 <RouteInterceptor
                   key={route.path}
                   {...route}
@@ -156,7 +167,16 @@ function App() {
                   loading={() => <Loading/> }
                   />
                 )
-              )}
+              )} */}
+
+              {createRoutes(locale).map((route, i) => (
+                <Route
+                  key={i}
+                  path={route.path}
+                  exact={route.exact}
+                  render={(props) => <route.component {...props} />}
+                />
+              ))}
             </Switch>
           </Router>
         </div>
