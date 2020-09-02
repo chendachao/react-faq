@@ -30,9 +30,9 @@ const withCacheFetch = async (fn, url, args) => {
   const cacheID = url;
   try {
     let temp = JSON.parse(localStorage.getItem(cacheID));
-    if(temp && temp.expires > Date.now()) {
-      return response = temp.data;
-    }
+    // if(temp && temp.expires > Date.now()) {
+    //   return response = temp.data;
+    // }
     localStorage.removeItem(cacheID);
     response = await fn(url, args);
     localStorage.setItem(cacheID, JSON.stringify({

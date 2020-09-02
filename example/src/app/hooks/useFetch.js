@@ -21,7 +21,7 @@ export function useFetch({url, options}) {
         setLoading(false);
       }, 3000);
     })();
-  }, []);
+  }, [url, options]);
 
   return [data, isLoading, fetchData];
 }

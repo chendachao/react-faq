@@ -8,7 +8,6 @@ import {
 
 import {
   IntlProvider,
-  RawIntlProvider,
   FormattedMessage,
 } from 'react-intl';
 
@@ -17,7 +16,6 @@ import Home from './app/pages/Home';
 import FAQDemo from "./app/components/FAQDemo";
 import RouteInterceptor from "./app/utils/routeInterceptor";
 import { getDefaultLang, request, withCacheFetch } from "./app/utils";
-import { generateIntl, intl } from "./intl";
 
 import './App.css';
 
@@ -37,22 +35,6 @@ const languages = [
     label: 'Chinese',
   },
 ];
-
-const updateIntl = (locale = initialLocale, messages = '') => {
-  generateIntl({locale, messages,
-    onError: (err) => {
-      if (err.code === "MISSING_TRANSLATION") {
-        console.warn("Missing translation", err.message);
-        return;
-      }
-      // throw err;
-      console.warn(err);
-    }
-  });
-  document.documentElement.lang = locale;
-}
-
-updateIntl();
 
 const lazyLoadComponent = component =>
   Lodable(() => component, {
@@ -88,8 +70,8 @@ const createRoutesConfig = (locale) => {
 
 function App() {
 
-  const [isLoading18nMessages, setIsLoading18nMessages] = useState(false);
   const [locale, setLocale] = useState(initialLocale);
+  const [msg, setMsg] = useState('');
 
   const fetchTranslation = async (lang = initialLocale) => {
     const url = `/react-faq/assets/locales/${lang}.json`;
@@ -98,11 +80,10 @@ function App() {
   };
 
   const switchLocale = async newLocale => {
-    setIsLoading18nMessages(true);
-    setLocale(newLocale);
     const messages = await fetchTranslation(newLocale);
-    updateIntl(newLocale, messages);
-    setIsLoading18nMessages(false);
+    setLocale(newLocale);
+    setMsg(messages);
+    document.documentElement.lang = locale;
   };
 
   const loadContext = async (url, component, path) => {
@@ -113,18 +94,17 @@ function App() {
   // first update
   useEffect(() => {
     (async () => {
-      setIsLoading18nMessages(true);
       const messages = await fetchTranslation();
-      updateIntl('', messages);
-      setIsLoading18nMessages(false);
+      setMsg(messages);
     })();
   }, []);
 
-  if(!intl.messages) {
+  if(!msg) {
     return <div>Loading i18n...</div>;
   } else {
     return (
-      <RawIntlProvider value={intl} locale="en" defaultLocale="en-US">
+      // <RawIntlProvider value={intl} locale="en" defaultLocale="en-US">
+      <IntlProvider locale={locale} defaultLocale="en-US" messages={msg}>
 
         <div style={{ textAlign: 'right' }}>
           <select
@@ -168,13 +148,13 @@ function App() {
             </ul>
 
             <Switch>
-              {createRoutesConfig(intl.locale).map(route => (
-                  <RouteInterceptor
-                    key={route.path}
-                    {...route}
-                    loadContext={loadContext}
-                    loading={() => <Loading/> }
-                   />
+              {createRoutesConfig(locale).map(route => (
+                <RouteInterceptor
+                  key={route.path}
+                  {...route}
+                  loadContext={loadContext}
+                  loading={() => <Loading/> }
+                  />
                 )
               )}
             </Switch>
@@ -183,7 +163,8 @@ function App() {
 
         <FAQDemo/>
 
-    </RawIntlProvider>
+    </IntlProvider>
+    // </RawIntlProvider>
     )
   }
 }
