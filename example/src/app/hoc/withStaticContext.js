@@ -7,11 +7,18 @@ export default function withStaticContext(WrappedComponent, config) {
       super(props);
       this.state = {
         context: null,
+        isLoadingTranslation: false
       };
     }
 
     loadContext = async (url) => {
+      this.setState({
+        isLoadingTranslation: true
+      });
       const response = await withCacheFetch(request, url);
+      this.setState({
+        isLoadingTranslation: false
+      });
       return this.setState({
         context: response,
       });
@@ -30,11 +37,11 @@ export default function withStaticContext(WrappedComponent, config) {
     }
 
     render() {
-      const { context } = this.state;
-      if (!context) {
-        return config.fallback;
+      const { isLoadingTranslation, context } = this.state;
+      if (isLoadingTranslation) {
+        return config.fallback || <div>Loading...</div>;
       }
-      return <WrappedComponent {...this.props} context={this.state.context} />;
+      return <WrappedComponent {...this.props} context={context} />;
     }
   }
 

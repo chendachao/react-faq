@@ -149,6 +149,7 @@ function App() {
                     className='help-link'
                     data-cp-help-dock
                     data-cp-faq-id='67'
+                    data-cp-faq-slug='product-and-supplier'
                   >
                     ?
                   </button>

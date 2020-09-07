@@ -6,5 +6,6 @@
   "home.welcome": "Welcome {name}!",
   "home.declarative": "Bang Bang Da!",
   "home.declarative.p1": "Internationalization",
-  "message.loading": "Loading"
+  "message.loading": "Loading",
+  "page1.text": "this is text"
 }

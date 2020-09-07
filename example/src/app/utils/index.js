@@ -25,20 +25,23 @@ const request = async (url, options) => {
   return response.data;
 };
 
+// network first
 const withCacheFetch = async (fn, url, args) => {
   let response;
   const cacheID = url;
   try {
     let temp = JSON.parse(localStorage.getItem(cacheID));
-    // if(temp && temp.expires > Date.now()) {
-    //   return response = temp.data;
-    // }
-    localStorage.removeItem(cacheID);
-    response = await fn(url, args);
-    localStorage.setItem(cacheID, JSON.stringify({
-      expires: Date.now() + 0.5 * 60 * 1000,
-      data: response
-    }));
+    if(temp && temp.expires > Date.now()) {
+      response = temp.data;
+    }
+    const remoteResponse = await fn(url, args);
+    if(remoteResponse) {
+      localStorage.setItem(cacheID, JSON.stringify({
+        expires: Date.now() + 0.5 * 60 * 1000,
+        data: response
+      }));
+      response = remoteResponse;
+    }
     return response;
   } catch (error) {
     return response;

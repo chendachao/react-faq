@@ -7,7 +7,7 @@ import { useFetch } from "../hooks/useFetch";
 
 function FAQDemo() {
   // load data at first mount
-  const [data, isLoading, fetchData] = useFetch({
+  const [data = [], isLoading, fetchData] = useFetch({
     url: '/react-faq/assets/data/en/faqs.json'
   });
 
@@ -17,7 +17,7 @@ function FAQDemo() {
     return new Promise(async (resolve, reject) => {
       setTimeout(async () => {
         const data = await fetchData(url);
-        resolve(data.content);
+        resolve(data && data.content);
       }, 500);
     });
   };
