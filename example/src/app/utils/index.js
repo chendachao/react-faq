@@ -36,11 +36,11 @@ const withCacheFetch = async (fn, url, args) => {
     }
     const remoteResponse = await fn(url, args);
     if(remoteResponse) {
+      response = remoteResponse;
       localStorage.setItem(cacheID, JSON.stringify({
         expires: Date.now() + 0.5 * 60 * 1000,
         data: response
       }));
-      response = remoteResponse;
     }
     return response;
   } catch (error) {
