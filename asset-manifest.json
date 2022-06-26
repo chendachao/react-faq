@@ -1,26 +1,27 @@
 {
   "files": {
     "main.css": "/react-faq/static/css/main.4cfbd9ef.chunk.css",
-    "main.js": "/react-faq/static/js/main.a1c1eb8f.chunk.js",
-    "main.js.map": "/react-faq/static/js/main.a1c1eb8f.chunk.js.map",
-    "runtime-main.js": "/react-faq/static/js/runtime-main.1f1c78e7.js",
-    "runtime-main.js.map": "/react-faq/static/js/runtime-main.1f1c78e7.js.map",
-    "static/js/2.364388c5.chunk.js": "/react-faq/static/js/2.364388c5.chunk.js",
-    "static/js/2.364388c5.chunk.js.map": "/react-faq/static/js/2.364388c5.chunk.js.map",
-    "static/js/3.0059ca50.chunk.js": "/react-faq/static/js/3.0059ca50.chunk.js",
-    "static/js/3.0059ca50.chunk.js.map": "/react-faq/static/js/3.0059ca50.chunk.js.map",
-    "static/js/4.bcabc62c.chunk.js": "/react-faq/static/js/4.bcabc62c.chunk.js",
-    "static/js/4.bcabc62c.chunk.js.map": "/react-faq/static/js/4.bcabc62c.chunk.js.map",
+    "main.js": "/react-faq/static/js/main.d4746b12.chunk.js",
+    "main.js.map": "/react-faq/static/js/main.d4746b12.chunk.js.map",
+    "runtime-main.js": "/react-faq/static/js/runtime-main.c29c0980.js",
+    "runtime-main.js.map": "/react-faq/static/js/runtime-main.c29c0980.js.map",
+    "static/js/2.a9444b16.chunk.js": "/react-faq/static/js/2.a9444b16.chunk.js",
+    "static/js/2.a9444b16.chunk.js.map": "/react-faq/static/js/2.a9444b16.chunk.js.map",
+    "static/js/3.c86ee185.chunk.js": "/react-faq/static/js/3.c86ee185.chunk.js",
+    "static/js/3.c86ee185.chunk.js.map": "/react-faq/static/js/3.c86ee185.chunk.js.map",
+    "static/js/4.28a638d0.chunk.js": "/react-faq/static/js/4.28a638d0.chunk.js",
+    "static/js/4.28a638d0.chunk.js.map": "/react-faq/static/js/4.28a638d0.chunk.js.map",
     "index.html": "/react-faq/index.html",
-    "precache-manifest.6eb8d5e7ff933e9d0fdfe08c417d82a2.js": "/react-faq/precache-manifest.6eb8d5e7ff933e9d0fdfe08c417d82a2.js",
+    "precache-manifest.4fa7502662c25a20b089ef10b0d8fee7.js": "/react-faq/precache-manifest.4fa7502662c25a20b089ef10b0d8fee7.js",
     "service-worker.js": "/react-faq/service-worker.js",
     "static/css/main.4cfbd9ef.chunk.css.map": "/react-faq/static/css/main.4cfbd9ef.chunk.css.map",
-    "static/js/2.364388c5.chunk.js.LICENSE.txt": "/react-faq/static/js/2.364388c5.chunk.js.LICENSE.txt"
+    "static/js/2.a9444b16.chunk.js.LICENSE.txt": "/react-faq/static/js/2.a9444b16.chunk.js.LICENSE.txt",
+    "static/js/main.d4746b12.chunk.js.LICENSE.txt": "/react-faq/static/js/main.d4746b12.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.1f1c78e7.js",
-    "static/js/2.364388c5.chunk.js",
+    "static/js/runtime-main.c29c0980.js",
+    "static/js/2.a9444b16.chunk.js",
     "static/css/main.4cfbd9ef.chunk.css",
-    "static/js/main.a1c1eb8f.chunk.js"
+    "static/js/main.d4746b12.chunk.js"
   ]
 }
